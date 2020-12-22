@@ -2,7 +2,10 @@
   <div id="app">
     <div id="nav">
       <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+      <router-link to="/login">Log In</router-link> |
+      <router-link to="/signup">Sign Up</router-link> |
+      <router-link to="/enrollment">Matrícula</router-link> |
+      <router-link to="/enrollment/edit">Editar Matrículas</router-link>
     </div>
     <router-view />
   </div>
@@ -28,5 +31,14 @@
 
 #nav a.router-link-exact-active {
   color: #42b983;
+}
+
+:root {
+  --primary-color: #52c876;
+  --primary-color-dark: #388a51;
+  --secondary-color: #525ec8;
+  --secondary-color-dark: #38398a;
+  --danger-color: #e4491a;
+  --danger-color-dark: #c03c14;
 }
 </style>
