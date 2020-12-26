@@ -7,7 +7,7 @@
       placeholder="Numero de Estudante"
     />
     <app-input
-      v-model="studentConfirmationNumber"
+      v-model="verificationCode"
       type="number"
       placeholder="Numero de Verificacao de Matricula"
     />
@@ -45,7 +45,7 @@ export default Vue.extend({
       studentId: 0,
       confirmPassword: "",
       isErrorDialogVisible: false,
-      studentConfirmationNumber: 0,
+      verificationCode: 0,
       errorMessage: "",
     };
   },
@@ -60,8 +60,8 @@ export default Vue.extend({
         await SignUpApi.signUp({
           email: this.email,
           password: this.password,
-          student_id: this.studentId,
-          student_confirmation_code: this.studentConfirmationNumber,
+          studentId: this.studentId,
+          verificationCode: this.verificationCode,
         });
       } catch (error) {
         if (error instanceof ApiError) {
