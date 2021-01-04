@@ -6,7 +6,7 @@ const prerequisitesAreFulfilled = (
   completedCourses: Set<string>
 ) => {
   for (const courseCode of prerequisites) {
-    if (!(courseCode in completedCourses)) {
+    if (!completedCourses.has(courseCode)) {
       return false;
     }
   }
@@ -27,9 +27,9 @@ const sortCourses = async (
   };
 
   for (const course of courses) {
-    if (course.code in completedCourses) {
+    if (completedCourses.has(course.code)) {
       sortedCourses.completedCourses.push(course);
-    } else if (course.code in requestedCourses) {
+    } else if (requestedCourses.has(course.code)) {
       sortedCourses.alreadyRequested.push(course);
     } else if (
       !prerequisitesAreFulfilled(course.prerequisites, completedCourses)
@@ -44,19 +44,19 @@ const sortCourses = async (
 };
 
 const getAllCourses = async (): Promise<Course[]> => {
-  const { courses } = await callApi("/courses");
+  const { courses } = await callApi("courses");
 
   return courses;
 };
 
 const getCompletedCoursesSet = async (): Promise<Set<string>> => {
-  const { courseCodes } = await callApi("/student/completed-courses");
+  const { courseCodes } = await callApi("students/completed-courses");
 
   return new Set(courseCodes);
 };
 
 const getRequestedCoursesSet = async (): Promise<Set<string>> => {
-  const { courseCodes } = await callApi("/enrollment-requests");
+  const { courseCodes } = await callApi("enrollment-requests");
 
   return new Set(courseCodes);
 };
