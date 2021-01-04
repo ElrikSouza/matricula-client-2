@@ -7,15 +7,18 @@ export const callApi = async (url: string, options: RequestInit = {}) => {
   const accessToken = localStorage.getItem(accessTokenKey) as string;
 
   const response = await fetch(`${baseURl}/${url}`, {
-    headers: { authorization: accessToken },
+    headers: { authorization: `Bearer ${accessToken}` },
     ...options,
-  }).then(response => response.json());
+  });
 
-  if (response.ok) {
-    return response;
+  const isResponseOk = response.ok;
+  const jsonResult = await response.json();
+
+  if (!isResponseOk) {
+    throw new ApiError(jsonResult.message);
   }
 
-  throw new ApiError(response.message);
+  return jsonResult;
 };
 
 export const postCallApi = (
