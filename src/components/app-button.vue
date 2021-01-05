@@ -8,6 +8,7 @@
       'btn--md': size == 'md',
       'btn--sm': size == 'sm',
     }"
+    type="button"
     v-bind="$attrs"
     @click="$emit('click')"
   >
