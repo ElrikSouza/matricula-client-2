@@ -20,6 +20,11 @@ const routes: Array<RouteConfig> = [
     name: "SignUp",
     component: () => import("../auth/signup/index.vue"),
   },
+  {
+    path: "/enrollment",
+    name: "Enrollment",
+    component: () => import("../enrollment/index.vue"),
+  },
 ];
 
 const router = new VueRouter({
