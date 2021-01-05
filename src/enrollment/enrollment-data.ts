@@ -1,4 +1,4 @@
-import { callApi } from "@/api";
+import { callApi, postCallApi } from "@/api";
 import { Course } from "./course";
 
 const prerequisitesAreFulfilled = (
@@ -70,3 +70,6 @@ export const getSortedCourses = async () => {
 
   return sortCourses(courses, completedCourses, requestedCourses);
 };
+
+export const submitRequests = async (courseCodes: string[]) =>
+  postCallApi("enrollment-requests", { courseCodes });
