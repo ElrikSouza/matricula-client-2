@@ -56,9 +56,15 @@ const getCompletedCoursesSet = async (): Promise<Set<string>> => {
 };
 
 const getRequestedCoursesSet = async (): Promise<Set<string>> => {
-  const { courseCodes } = await callApi("enrollment-requests");
+  const { courseCodes } = await callApi("enrollment-requests?codesOnly=true");
 
   return new Set(courseCodes);
+};
+
+export const getRequestedCourses = async (): Promise<Course[]> => {
+  const { courses } = await callApi("enrollment-requests");
+
+  return courses;
 };
 
 export const getSortedCourses = async () => {
@@ -73,3 +79,10 @@ export const getSortedCourses = async () => {
 
 export const submitRequests = async (courseCodes: string[]) =>
   postCallApi("enrollment-requests", { courseCodes });
+
+export const deleteEnrollmentRequests = async (courseCodes: string[]) =>
+  callApi("enrollment-requests:bulk", {
+    method: "DELETE",
+    body: JSON.stringify({ courseCodes }),
+    headers: { "Content-Type": "application/json" },
+  });

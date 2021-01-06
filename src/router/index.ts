@@ -25,6 +25,11 @@ const routes: Array<RouteConfig> = [
     name: "Enrollment",
     component: () => import("../enrollment/index.vue"),
   },
+  {
+    path: "/enrollment/edit",
+    name: "Edit",
+    component: () => import("../enrollment/edit.vue"),
+  },
 ];
 
 const router = new VueRouter({

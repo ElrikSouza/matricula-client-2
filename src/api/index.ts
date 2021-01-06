@@ -3,12 +3,15 @@ import { ApiError } from "./api-error";
 const baseURl = process.env.VUE_APP_BASE_URL;
 const accessTokenKey = "TOKEN";
 
-export const callApi = async (url: string, options: RequestInit = {}) => {
+export const callApi = async (
+  url: string,
+  { headers, ...options }: RequestInit = {}
+) => {
   const accessToken = localStorage.getItem(accessTokenKey) as string;
 
   const response = await fetch(`${baseURl}/${url}`, {
-    headers: { authorization: `Bearer ${accessToken}` },
     ...options,
+    headers: { authorization: `Bearer ${accessToken}`, ...headers },
   });
 
   const isResponseOk = response.ok;
