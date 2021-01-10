@@ -63,6 +63,7 @@ export default Vue.extend({
   methods: {
     async submitRequests() {
       await EnrollmentService.submitRequests(this.selectedCourses);
+      this.sortedCourses = await EnrollmentService.getSortedCourses();
     },
   },
 });

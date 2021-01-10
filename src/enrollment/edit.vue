@@ -6,7 +6,11 @@
       <ul>
         <li v-for="course in requestedCourses" :key="course.code">
           {{ course.name }}
-          <app-button @click="removeEnrollmentRequest(course.code)">
+          <app-button
+            color="danger"
+            size="sm"
+            @click="removeEnrollmentRequest(course.code)"
+          >
             Cancelar
           </app-button>
         </li>
@@ -17,7 +21,7 @@
       <ul>
         <li v-for="course in requestsToBeCancelled" :key="course.code">
           {{ course.name }}
-          <app-button @click="undoRemoval(course.code)">
+          <app-button size="sm" @click="undoRemoval(course.code)">
             Desfazer
           </app-button>
         </li>
@@ -80,6 +84,8 @@ export default Vue.extend({
       const courseCodes = this.requestsToBeCancelled.map(course => course.code);
 
       await EnrollmentData.deleteEnrollmentRequests(courseCodes);
+
+      this.$router.push("/enrollment");
     },
   },
 });
