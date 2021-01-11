@@ -41,4 +41,9 @@
   --danger-color: #e4491a;
   --danger-color-dark: #c03c14;
 }
+
+ul {
+  list-style: none;
+  padding: 0;
+}
 </style>
